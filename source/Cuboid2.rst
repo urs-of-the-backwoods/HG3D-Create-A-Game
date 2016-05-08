@@ -3,9 +3,18 @@ Cuboid2 Game
 
 Cuboid2 is a re-implementation of the `Cuboid`_ game from Pedro Martins, who originally implemented it with Yampa and GLUT. A typical game level exhibits a green and a red shpere and some cubes arranged in a 3D world. You can move the green sphere along the 3 axes, the movement only stops at other cubes, so it is important not to "loose" the green sphere in space. Goal is to reach the red sphere, the target. After finishing with one level, the next level show up until the third, final level is reached. The level data are from the original game. The original implementation is a showcase for FRP with usage of the Yampa library. The implemenation below is in "imperative" style meaning that for drawing and other IO actions are sequenced like in a standard language. The gamelogic is not complex and written in purely functional style.
 
+You can build this example by copying the source code to your project directory from here: `Cuboid2 source code`_ and additionally using a project created by "aio CreateProject" and replacing the "game.hs". Building and running is then accomplished by:
+
+.. code-block:: console
+
+    aio CreateProject
+    <now replace code inside game.hs with content from Cuboid2.hs>
+    ./build
+    ./run
+
 .. _`Cuboid`: https://hackage.haskell.org/package/cuboid
 
-.. _`Cuboid2`: https://github.com/urs-of-the-backwoods/HGamer3D/raw/master/examples/Cuboid2.hs
+.. _`Cuboid2 source code`: https://github.com/urs-of-the-backwoods/HGamer3D/raw/master/examples/Cuboid2.hs
 
 |
 

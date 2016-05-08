@@ -110,6 +110,8 @@ With those pieces a space invaders game can be programmed. Before looking into t
 SpaceInvaders Game Code
 -----------------------
 
+Below you will find the space invaders game code. Additionally to the usual procedure of creating a template project with "aio CreateProject" and replacing "game.hs" by the following code, you also need to add "containers" to the dependencies line ("build-depends:") in "game.cabal".
+
 .. code-block:: Haskell
 	:linenos:
 

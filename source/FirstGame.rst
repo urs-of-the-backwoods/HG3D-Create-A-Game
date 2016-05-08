@@ -149,7 +149,18 @@ Have a look also at the type of doWhile taking a list of actions and performing 
 is the list composed? It is actually the "repeat" function taking something and building a list of it by repeating it indefinetly. The repeat function in this case takes an action itself, so it composes a list of actions and then later in the doWhile loop those actions are performed.
 This only works without blowing up the stack, since Haskell is a lazy language, which builds the list itself only to the degree where it is needed.
 
-Now as a last one for this page, start your editor copy the code into the game.hs file, compile again and run it!
+Now as a last one for this page, start your editor copy the code into the game.hs file, compile again and run it! But wait, this does not work, since there is a dependency missing in the cabal file. So please update your game.cabal file and include "random" in it, like so:
+
+.. code-block:: console
+
+	executable game
+	  hs-source-dirs:      .
+	  main-is:             game.hs
+	  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+	  build-depends:       base, text, HGamer3D >= 0.7.1, random
+	  default-language:    Haskell2010
+
+In general, you need to add package dependencies here, in case that they are included in stackage. In cast that they are not included in stackage, you also need to add them in the stack.yaml file. Now you are ready to build and run the number guessing game:
 
 .. code-block:: console
 
