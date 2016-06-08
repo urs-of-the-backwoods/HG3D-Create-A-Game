@@ -126,7 +126,7 @@ html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 
 html_theme_options = {
     # Navigation bar title. (Default: ``project`` value)
-    'navbar_title': "Create a Game with Haskell",
+    'navbar_title': "HGamer3D",
 
     # Tab name for entire site. (Default: "Site")
     'navbar_site_name': "Site",
@@ -175,13 +175,13 @@ html_theme_options = {
 
     # Location of link to source.
     # Options are "nav" (default), "footer" or anything else to exclude.
-    'source_link_position': "xxx",
+    'source_link_position': "exclude",
 
     # Bootswatch (http://bootswatch.com/) theme.
     #
     # Options are nothing (default) or the name of a valid theme
-    # such as "amelia" or "cosmo".
-    'bootswatch_theme': "readable",
+    # such as "spacelab", "slate", readable", amelia" or "cosmo".
+    'bootswatch_theme': "spacelab",
 
     # Choose Bootstrap version.
     # Values: "3" (default) or "2" (in quotes)
@@ -193,7 +193,7 @@ html_theme_options = {
 html_title = 'Create a Game with Haskell'
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
-html_short_title = 'Create a Game with Haskell'
+# html_short_title = 'HGamer3D'
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
