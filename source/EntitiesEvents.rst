@@ -1,6 +1,8 @@
 Entities and Events
 ###################
 
+Before starting with more Haskell game programming it might be a good idea to have a look at some basic concepts of the |HGamer3D| API and its structure. The most basic building blocks we will need are entities and events.
+
 The Entity
 ----------
 
