@@ -34,6 +34,7 @@ And now, start reading and coding with |HGamer3D|.
 	Learning Haskell <LearningHaskell>
 	Space Invaders 2D <SpaceInvaders2D>
 	The Code - Space Invaders 2D <CodeSpaceInvaders2D>
+	Actions and do Notation <Actions>
 	Impressum
 
 |
