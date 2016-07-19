@@ -6,7 +6,7 @@ This short page should get everybody started on actions and do notation, since t
 Haskell is non-strict
 ---------------------
 
-The order of evaluation of an expression in Haskell is non-strict. This means every expression is just evaluated to the depth to which results are really needed. All other evaluations are skipped and stored for later evaluation. You can make this visibl by starting the interpreter and trying a couple of expressions with the ``undefined`` value.
+The order of evaluation of an expression in Haskell is non-strict. This means every expression is just evaluated to the depth to which results are really needed. All other evaluations are skipped and stored for later evaluation. You can make this apparent by starting the interpreter and trying a couple of expressions with the ``undefined`` value.
 
 **undefined**
 
@@ -23,7 +23,7 @@ Kickstart the ghci interpreter by typing ``./repl`` and evaluate the following e
 	l !! 1                              -- output: 1
 	l !! 4                              -- gives an error
 	l !! 5                              -- output: 5 (although !! needs to traverse the undefined element)
-	let x = l !! 5                      -- no output (undefined is NOT evaluated, though assigned to x)
+	let x = l !! 4                      -- no output (undefined is NOT evaluated, though assigned to x)
 	x                                   -- gives an error
 
 The results are remarkable. Evaluation only happens, if the output is needed. Even giving the element 4 of the list another name is not generating an error, since this still does not mean this element is evaluated. Only printing it evaluates it.
@@ -73,7 +73,7 @@ You need to memorize the following rules around do notation:
 
 - Each line is either an action and of type "IO a" or a let binding.
 - Actions are executed, one by one in sequence.
-- Lines with a left arrow ``<-`` de-sugar into a bind operator where the name on the left side of the operator is bound with the result of executing the action on the right hand side. The bound value is valid for the remaining part of the do block.
+- Lines with a left arrow ``<-`` de-sugar into a bind operator so that the name on the left side of the arrow is bound with the result of executing the action on the right hand side. The bound value is valid for the remaining part of the do block.
 - Lines without a left arrow are actions which are executed and whose value is discarded.
 - The result of the last action in the do block is the result of the overall do block.
 - ``return`` lifts a pure value into a value of type "IO a". It is needed at the end since the last statement of a do block needs to be an action.

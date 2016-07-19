@@ -45,6 +45,9 @@ If you encounter any issues please send me an e-mail, so I can correct it: uotbw
 
 News
 ----
+- July, 19th - detected that Mac version has serious issues, new version is work in progress
+- July - fixed memleak, updated CreateProject, please do: "aio update Run", "aio update CreateProject" (if no alias set, use full urls)
+- June, 28th - fixed Mac platform build, (missing symlink in engine), please do: "aio update Run" (if no alias set, use full url)
 - 7th June 2016 - fixed regression on aio Windows, please do: "aio update Lua", "aio update Stack" (if no alias set, use full url)
 - June 2016 - fixed "CreateProject" on Windows, please do: "aio update CreateProject" (if no alias set, use full url)
 - May 2016 - fixed Mouse bug (Windows, Linux), 100%CPU bug (Linux), please do: "aio update Run" (if no alias set, use full url)
