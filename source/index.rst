@@ -5,13 +5,13 @@ Create a Game with Haskell
 
 |
 
-.. image:: images/cuboid2.jpg
+.. image:: images/RotatingCube2.jpg
    :width: 30%
 
-.. image:: images/materials.jpg
+.. image:: images/SpaceInvaders.jpg
    :width: 30%
 
-.. image:: images/soundeffects.jpg
+.. image:: images/SoundEffects.jpg
    :width: 30%
 
 |
@@ -30,29 +30,33 @@ And now, start reading and coding with |HGamer3D|.
 	:maxdepth: 1
 
 	Your First Haskell Game <FirstGame>
-	Entities and Events <EntitiesEvents>
 	Learning Haskell <LearningHaskell>
-	Space Invaders 2D <SpaceInvaders2D>
-	The Code - Space Invaders 2D <CodeSpaceInvaders2D>
 	Actions and do Notation <Actions>
+	API I: Entities <Entities>
+	API II: Events <Events>
+	API III: 3D Coordinates <Coordinates>
+	Tools: Arriccio <Arriccio>
+	Game: Cuboid2 <Cuboid2>
+	Game: Space Invaders <SpaceInvaders>
 	Impressum
+
+..
+	Tools: Distributing your Game <Distribution>
+..
 
 |
 
 If you encounter any issues please send me an e-mail, so I can correct it: uotbw@hgamer3d.org.
 
-.. note:: A big "thank you!" to the creators and maintainers of Haskell, GHC, Urho3D, stack, Textadept and other open source libraries and tools. |HGamer3D| is based on their work. 
+.. note:: A big "thank you!" to the creators and maintainers of Haskell, GHC, Urho3D, stack, Textadept, vect and other open source libraries and tools. |HGamer3D| is based on their work. 
 
 News
 ----
-- July, 19th - detected that Mac version has serious issues, new version is work in progress
-- July - fixed memleak, updated CreateProject, please do: "aio update Run", "aio update CreateProject" (if no alias set, use full urls)
-- June, 28th - fixed Mac platform build, (missing symlink in engine), please do: "aio update Run" (if no alias set, use full url)
-- 7th June 2016 - fixed regression on aio Windows, please do: "aio update Lua", "aio update Stack" (if no alias set, use full url)
-- June 2016 - fixed "CreateProject" on Windows, please do: "aio update CreateProject" (if no alias set, use full url)
-- May 2016 - fixed Mouse bug (Windows, Linux), 100%CPU bug (Linux), please do: "aio update Run" (if no alias set, use full url)
-- May 2016 - updated "aio" with better error messages, please download version 0.1.2
+- Sep, 14th - HGamer3D presented at `HAL 2016`_, see `abstract`_ and `slides`_.
 
+.. _`HAL 2016`: http://hal2016.haskell.org
+.. _`abstract`: http://hal2016.haskell.org/program.html#althainz-talk
+.. _`slides`: http://hal2016.haskell.org/slides/HAL2016-althainz.pdf
 
 .. include:: GeneralInclusions
 

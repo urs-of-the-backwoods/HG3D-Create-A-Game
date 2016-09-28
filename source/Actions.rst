@@ -16,7 +16,7 @@ The undefined value can mimic every type and it is just the so-called *bottom* o
 
 Kickstart the ghci interpreter by typing ``./repl`` and evaluate the following examples:
 
-.. code :: haskell
+.. code-block :: haskell
 
 	let l = [0,1,2,3,undefined,5,6]     -- no output, no error, l is being assigned
 	l                                   -- prints [0,1,2,3 and then an error
@@ -60,14 +60,11 @@ do Notation
 
 Do notation is provided by the Haskell compiler and interpreter and it is just syntactic sugar for using the bind and sequence operators directly. It is immensly useful but there are some pitfalls. Let's explain the main elements in an example.
 
-.. code:: haskell
 
-	main = do 
-	    let loopTime = msecT 20
-	    (eGeo, hg3d) <- start
-	    forkIO $ rotateCube eGeo
-	    loopHG3D hg3d loopTime (return True) -- allow close on windows click
-	    return ()
+.. literalinclude:: ../../HGamer3D/examples/SpaceInvaders.hs
+    :start-after: -- HGamer3D website, actions and do notation, first example
+    :end-before: -- end of website text
+    :language: Haskell
 
 You need to memorize the following rules around do notation:
 
@@ -91,7 +88,7 @@ As a last point on this page, there is one more tip to follow with regards to do
 
 If statements and do notation interact in strange ways. Therefore another tip, if you need to write an if statement within a do loop, follow the indentation layout as is shown below:
 
-.. code:: haskell
+.. code-block:: Haskell
 
 	main = do
 	  s <- readline

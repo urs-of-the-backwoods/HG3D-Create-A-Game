@@ -18,7 +18,7 @@ First, download the ``aio`` tool and install it in your execution path. (Being c
 .. _`Arriccio - Windows Version Download`: http://www.hgamer3d.org/downloads/aio-amd64-windows-0.1.2.zip
 .. _`Arriccio - OS X Version Download`: http://www.hgamer3d.org/downloads/aio-amd64-darwin-0.1.2.tar.gz
 
-.. note:: To ease up game programming with Haskell, I created a small utility layer, called `fresco`_ and one of the tools out of this toolbox is the arriccio tool, with the short name ``aio``. The name arriccio is taken from the world of art, it is a specific layer of clay, which is used during the creation of a fresco.
+.. note:: 64 bit only at the moment (due to time constraints in setting up another 3 environments, sorry)
 
 .. _`fresco`: http://github.com/urs-of-the-backwoods/fresco
 .. _`source`: http://github.com/urs-of-the-backwoods/fresco/blob/master/arriccio/main.go
@@ -42,38 +42,8 @@ Fourth, build and run the program.
 	./build
 	./run
 
-You should see a spinning cube! Wow that was fast. To be fair there is some needed during execution of the commandds to install things and you need to answer ``yes`` to all install questions. The next section will explain in some more detail, how arricio helps in setting up the tools.
+You should see a spinning cube! Wow that was fast. To be fair there is some time needed during execution of the commands to install things and you need to answer ``yes`` to all install questions. Details on the arriccio tool can be found in the next section, now we shortly look at the pieces, which you just used.
 
-----
-
-Arriccio
-~~~~~~~~
-
-Programming a game in any language involves a lot of different components to play together, for example game libraries, language bindings, multi media files and so on. All of those pieces need to go somewhere and usually it is quite some work to just figure out where to place them and to setup everything. Arriccio is doing that for you. It is a bookkeeper which is managing components and assembling ready to run packages by reading metadata and installing the neccessary files. 
-
-To use it you need to know that components are identified by their url or alternatively by an alias you can freely choose. |HGamer3D| already provides you with a number of those components and arriccio manages them for you. You probably saw the component names, like ``http://www.hgamer3d.org/component/Stack`` being used in commands to ``aio``. 
-
-Fire up arriccio without parameter and you will get a short helping introduction. If you look closer at the arriccio commands you'll see that most of them take the url or a name - an alias - as parameter. The primary key for distinguishing components is the url. Since url's tend to be long and difficult to remember, you can attach an alias for day to day use with arriccio. Please do that now for a number of components which you will need during the next pages. Please enter the following commands to assign the alias names:
-
-.. code-block:: console
-
-	aio alias Stack http://www.hgamer3d.org/component/Stack
-	aio alias CreateProject http://www.hgamer3d.org/component/CreateProject
-	aio alias Edit http://www.hgamer3d.org/component/Edit
-	aio alias Run http://www.hgamer3d.org/component/Run
-	aio alias Lua http://www.hgamer3d.org/component/Lua
-
-Let's try now one of those components in isolation for purpose of getting more used to arriccio. Simply issue the following command in a shell:
-
-.. code-block:: console
-
-	aio Lua
-
-What happens? The first time you try to run a component with arriccio it needs to download the component to your machine. So the tool comes back with a question and asks, if you are ok with that. Have a closer look, it gives you a tar.gz filename it is going to download and a signing key. This signing key identifies the person who created the downloaded data, which in this case is me, I signed the components from |HGamer3D| with my key. Arriccio will check if the data has not being messed up somehow by verifying the signature.
-
-If you answer with "yes" a download will appear, and after that the command line of the lua interpreter is displayed. You can try some lua commands and exit with Ctrl-D (Ctrl-C on Windows). 
-
-Try some other commands of arriccio, for example the license command which gives you licensing information on the component you name.
 
 Haskell
 ~~~~~~~
@@ -94,7 +64,8 @@ Now let's have a look at the code of the spinning cube to get some ideas, how ga
 
 Or you have a look at the code as it is copied below. In the beginning there is one extension used, ``OverloadedStrings`` which is pretty harmless, it is needed to convert code strings to ``Text`` which is used througout the library. The imports are done, the main one being the one importing the library. 
 
-System initialization follows with the ``configureHG3D`` call and the setup of the entities like camera, text, cube and so on with ``newE`` calls handing in parameters as a list of special key value pairs. Those pairs are typed behind the scenes to have the correct mapping between key and value type. Rotation is done in a separately started thread, accessing the cube entity - called ``eGeo``. Finally the game loop is run in the main function and that's it.  
+All the game logic is inside the function ``gameLogic`` which takes one parameter ``hg3d``. This parameter contains hidden data on an initialized system and is handed in to the function from the ``runGame``` function in ``main``. First comes the setup of entities like camera, text and the cube geometry 
+with ``newE`` calls handing in parameters as a list of special key value pairs. Those pairs are typed behind the scenes to have the correct mapping between key and value type. Rotation is done in a separately started thread, accessing the cube entity - called ``eGeo``. Finally the game loop is run in the main function by calling the ``gameLogic`` function from ``runGame`` and that's it.  
 
 .. code-block:: haskell
 
@@ -108,13 +79,10 @@ System initialization follows with the ``configureHG3D`` call and the setup of t
 	import Control.Monad
 	import System.Exit
 
-	start = do
-
-	    -- initialize system
-	    hg3d <- configureHG3D      -- initialize
+	gameLogic hg3d = do
 
 	    -- create minimum elements, like a camera
-	    eCam <- newE [
+	    eCam <- newE hg3d [
 	        ctCamera #: FullViewCamera,
 	        ctPosition #: Vec3 1 1 (-30.0),
 	        ctLight #: Light PointLight 1.0 1000.0 1.0 
@@ -123,12 +91,12 @@ System initialization follows with the ``configureHG3D`` call and the setup of t
 	    -- do something interesting here, in this example case, it is a text and
 	    -- a rotating cube
 
-	    eText <- newE [
+	    eText <- newE hg3d [
 	        ctText #: "Rotating Cube Example",
 	        ctScreenRect #: Rectangle 10 10 100 25
 	        ]
 
-	    eGeo <- newE [
+	    eGeo <- newE hg3d [
 	        ctGeometry #: ShapeGeometry Cube,
 	        ctMaterial #: matBlue,
 	        ctScale #: Vec3 10.0 10.0 10.0,
@@ -136,24 +104,17 @@ System initialization follows with the ``configureHG3D`` call and the setup of t
 	        ctOrientation #: unitU
 	        ]
 
-	    return (eGeo, hg3d)
+	    let rotateCube = do
+	            forever $ do 
+	                updateC eGeo ctOrientation (\u -> (rotU vec3Z 0.02) .*. u)
+	                updateC eGeo ctOrientation (\u -> (rotU vec3X 0.015) .*. u)
+	                sleepFor (msecT 12)
 
-
-	rotateCube eGeo = do
-	    forever $ do 
-	        updateC eGeo ctOrientation (\u -> (rotU vec3Z 0.02) .*. u)
-	        updateC eGeo ctOrientation (\u -> (rotU vec3X 0.015) .*. u)
-	        sleepFor (msecT 12)
+	    forkIO rotateCube
 	    return ()
 
 	main = do 
-	    (eGeo, hg3d) <- start
-	    forkIO $ rotateCube eGeo
-	    loopHG3D hg3d (msecT 20) (return True) -- allow close on windows click
+	    runGame standardGraphics3DConfig gameLogic (msecT 20)
 	    return ()
-
-
-
-
 
 .. include:: GeneralInclusions
