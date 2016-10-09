@@ -35,6 +35,8 @@ Third, create a test directory, cd into it and install a program skeleton to sta
 
 	aio http://www.hgamer3d.org/component/CreateProject
 
+.. note:: CreateProject works in the current directory and overwrites existing files, so please only use it in a new, freshly created and empty directory!
+
 Fourth, build and run the program.
 
 .. code-block:: console
