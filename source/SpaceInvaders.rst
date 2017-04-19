@@ -1,5 +1,5 @@
-Game: Space Invaders
-####################
+Space Invaders
+##############
 
 |
 
@@ -56,7 +56,7 @@ A small actor implementation serves the purpose of separating different concerns
 
 .. note:: the forkIO in the ``runActor`` function creates a new thread for each actor. 
 
-.. literalinclude:: ../../SI3/Actor.hs
+.. literalinclude:: ../../SpaceIn3d/Actor.hs
     :start-after: -- HGamer3D website, space invaders, actors
     :end-before: -- end of website text
     :language: Haskell
@@ -98,7 +98,7 @@ Music                                                Switch, Move, Canon  plays 
 
 The switch actor is the coordination center of the complete appication. It keeps an indicator in which mode the game is currently executing and processes events, depending on this mode. As an example the key-input from the key actor is routed through the switch actor and is interpreted differently if the game is in "playing" mode or in "pause" state. The switch actor initializes new actors also depending on progress in game state. In the beginning it also displays the entry screen and after the user entered her name, the switch actor progresses to build state and creates the moving entities. For the main activities during the "play" mode the switch actor creates a gameloop actor, which handles parallel computations and collision detection. Finally the switch actor interconnects the auxilliary actors like music, animation, status bar and key input.
 
-.. literalinclude:: ../../SI3/Switch.hs
+.. literalinclude:: ../../SpaceIn3d/Switch.hs
     :start-after: -- HGamer3D website, space invaders, switch actor
     :end-before: -- end of website text
     :language: Haskell
@@ -111,7 +111,7 @@ The gameloop actor is a prototypical actor and short enough to display here comp
 
 The main function of the gameloop actor is coordinating the computation of the next gamestate by running the move and the canon actor in parallel. Those actor hand over the result of their computations to the collision actor which computes the collision status and sends it back to the gameloop actor for progressing with the next step. This makes up an efficient and fast gameloop with some parallel computation for movement of invaders (move actor) and movement of canon (canon actor), whereas collision detection is sequenced after having the results of both previous steps. Also note that the animation is done completely independently from the gameloop actor. This works since the 3D scene graph allows us to move the invader and canon entities independently from the pixels they are composed of. Also interesting to see how the data flow is implemented. The actual date for the current step is simply send in a message to the next computing actor. This is functional programming with immutable data structures at its best.
 
-.. literalinclude:: ../../SI3/GameLoop.hs
+.. literalinclude:: ../../SpaceIn3d/GameLoop.hs
     :start-after: -- HGamer3D website, space invaders, gameloop actor
     :end-before: -- end of website text
     :language: Haskell
@@ -123,7 +123,7 @@ Data Structure
 
 All messages used in the program are shown below. They constitute the high level run-time coordination flow, used in the game.
 
-.. literalinclude:: ../../SI3/Actor.hs
+.. literalinclude:: ../../SpaceIn3d/Actor.hs
     :start-after: -- HGamer3D website, space invaders, messages
     :end-before: -- end of website text
     :language: Haskell
@@ -134,7 +134,7 @@ The main game status is held in a tree data structure. The elements of the tree 
 
 .. _`heterogenous map`: https://hackage.haskell.org/package/HMap
 
-.. literalinclude:: ../../SI3/Data.hs
+.. literalinclude:: ../../SpaceIn3d/Data.hs
     :start-after: -- HGamer3D website, space invaders, data tree
     :end-before: -- end of website text
     :language: Haskell
@@ -148,7 +148,7 @@ Animation
 
 The animation is the movement of the "legs" and "arms" of the invaders. If you watch closely, you see that each invader has its own rythm, when to move. This is done by storing a random number and move only each n cycles. Since also the starting point is not uniform, state for the animation is also stored in the node data. On each animation step, pixels are exchanged from a hidden location to the screen and back in the next cycle. The animations are completely independent from the other changes on the data. This is leveraged to parallelize the animation completely. In the beginning, after the creation of the game data tree, the tree is copied to both the animation actor and the gameloop actor. Both actors work independently with their local copies and advance their respective node data states only on their data.
 
-.. literalinclude:: ../../SI3/Animate.hs
+.. literalinclude:: ../../SpaceIn3d/Animate.hs
     :start-after: -- HGamer3D website, space invaders, animate
     :end-before: -- end of website text
     :language: Haskell
@@ -160,7 +160,7 @@ Collision Detection
 
 During collision detection the tree is flattened to a list and on the list different filters are applied. Then collisions are detected between shots and invaders and between invaders and boulders for detecting an overrun of the invaders in the position of the boulders.
 
-.. literalinclude:: ../../SI3/Collision.hs
+.. literalinclude:: ../../SpaceIn3d/Collision.hs
     :start-after: -- HGamer3D website, space invaders, collision
     :end-before: -- end of website text
     :language: Haskell

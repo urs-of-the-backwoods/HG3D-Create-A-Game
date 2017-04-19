@@ -45,8 +45,8 @@ source_encoding = 'utf-8-sig'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Create a Game with Haskell - HGamer3D'
-copyright = u'2016'
+project = u'HGamer3D'
+copyright = u'2017'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -190,7 +190,7 @@ html_theme_options = {
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-html_title = 'Create a Game with Haskell'
+html_title = 'HGamer3D'
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 # html_short_title = 'HGamer3D'

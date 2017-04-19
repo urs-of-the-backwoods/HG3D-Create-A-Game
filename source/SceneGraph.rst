@@ -1,5 +1,5 @@
-The Scene Graph
-###############
+Scene Graph
+###########
 
 |
 

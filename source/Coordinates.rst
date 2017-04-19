@@ -1,5 +1,5 @@
-API III: 3D Coordinates
-#######################
+Coordinates
+###########
 
 There is a big problem you will face when starting with 3D game programming and this is vector math and locations. If you start with 2D game programming you draw a sprite at (0, 0) move it and snip-snap you see somehting moving. In 3D game programming, you do the same and - you see nothing. Ah you forgot the camera, add it, still a black screen. After thinking a while you find it, you need light, so you add light. Still a black screen. Finally you discover the camera points into positive z direction and is located at z-axis 10.0 and your object is at z-axis 0.0. So figuring out the correct camera direction costs you a day of recapture of math and you got it, your first object appears on the screen.
 

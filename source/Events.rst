@@ -1,5 +1,5 @@
-API II: Events
-##############
+Events
+######
 
 Interactive games are nothing without events. Key input, joystick input, sounds playing all of that are events. So the next step in API knowledge is about how are events handled. 
 

@@ -1,37 +1,18 @@
 .. _arriccio:
 
-Tools: Arriccio
-###############
+The Arriccio Tool
+#################
 
-To ease up game programming with Haskell, I created a small utility layer, called `fresco`_ and one of the tools out of this toolbox is the arriccio tool, with the short name ``aio``. The name arriccio is taken from the world of art, it is a specific layer of clay, which is used during the creation of a fresco.
+Programming a game in any language involves a lot of different components to play together, for example game libraries, language bindings, multi media files and so on. All of those pieces need to go somewhere and usually it is quite some work to just figure out where to place them and to setup everything. 
 
-The arriccio tool is used to split a larger program into components and manage the bookkeeping on running components. It is based on some of the principles of `dependency injection`_ to separate the components from each other. To use the tool only the section `Introduction`_ is helpful to read. The further sections give a much more detailed explanation, in case you would like to use arriccio for your own purposes or get a better understanding on |HGamer3D| tools in general. 
-
-Arriccio has been heavily inspired by `0install`_. 
+To ease up game programming with Haskell, I created a small utility layer, called `fresco`_ and one of the tools out of this toolbox is the arriccio tool, with the short name ``aio``. The name arriccio is taken from the world of art, it is a specific layer of clay, which is used during the creation of a fresco. The arriccio tool is used to split a larger program into components and manage the bookkeeping on running components. It is based on some of the principles of `dependency injection`_ to separate the components from each other. Arriccio has been heavily inspired by `0install`_. 
 
 .. _`fresco`: http://github.com/urs-of-the-backwoods/fresco
 .. _`dependency injection`: https://en.wikipedia.org/wiki/Dependency_injection
 .. _`0install`: http://0install.net
 
-Downloads and Source
---------------------
 
-* `Arriccio - Linux Version Download`_
-* `Arriccio - Windows Version Download`_
-* `Arriccio - OS X Version Download`_
-* `Source Code`_
-
-.. _`Arriccio - Linux Version Download`: http://www.hgamer3d.org/downloads/aio-amd64-linux-0.1.2.tar.gz
-.. _`Arriccio - Windows Version Download`: http://www.hgamer3d.org/downloads/aio-amd64-windows-0.1.2.zip
-.. _`Arriccio - OS X Version Download`: http://www.hgamer3d.org/downloads/aio-amd64-darwin-0.1.2.tar.gz
-.. _`Source Code`: http://github.com/urs-of-the-backwoods/fresco-arriccio
-
-.. note:: 64 bit only at the moment (due to time constraints in setting up another 3 environments, sorry)
-
-Introduction
-------------
-
-Programming a game in any language involves a lot of different components to play together, for example game libraries, language bindings, multi media files and so on. All of those pieces need to go somewhere and usually it is quite some work to just figure out where to place them and to setup everything. Arriccio is doing that for you. It is a bookkeeper which is managing components and it works by assembling them into ready to run packages.  
+The program arriccio can be found in the "tools" folder, it is named "aio".
 
 Fire up arriccio without parameter and you will get a short helping introduction. If you look closer at the arriccio commands you'll see that most of them take the url or a name - an alias - as parameter. The primary key for distinguishing components is the url. Since url's tend to be long and difficult to remember, you can attach an alias for day to day use with arriccio. Please do that now for a number of components which you will need during the next pages. Please enter the following commands to assign the alias names:
 

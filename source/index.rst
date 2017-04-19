@@ -1,7 +1,7 @@
 .. _MainIndex:
 
-Create a Game with Haskell
-##########################
+HGamer3D
+########
 
 |
 
@@ -16,29 +16,26 @@ Create a Game with Haskell
 
 |
 
-Using Haskell - the famous functional programming language - for game creation should be fun and ideally suited to explore functional programming. 
+Welcome dear brave code warrior! This site has been built to help you exploring Haskell by writing 3D computer games. 
 
-This website and the |HGamer3D| library will help you with that. It is all about simple and fun game programming with Haskell, learning step by step and putting a focus on how to do it. The library is open source and works on Linux, Windows and OS X. I am myself on the road to use this vehicle to get a better grasp of Haskell.
-
-And now, start reading and coding with |HGamer3D|. 
-
-|
+Look for the menue and choose by your taste:
 
 **Table of Contents**
 
 .. 	toctree::
 	:maxdepth: 1
 
-	Your First Haskell Game <FirstGame>
-	Learning Haskell <LearningHaskell>
-	Actions and do Notation <Actions>
-	API I: Entities <Entities>
-	API II: Events <Events>
-	API III: 3D Coordinates <Coordinates>
-	Tools: Arriccio <Arriccio>
-	Game: Cuboid2 <Cuboid2>
-	Game: Space Invaders <SpaceInvaders>
-	The Scene Graph <SceneGraph>
+	Start Programming <FirstGame>
+	More Examples <MoreExamples>
+	Geometries <Geometries>
+	Entities <Entities>
+	Coordinates <Coordinates>
+	Scene Graph <SceneGraph>
+	Events <Events>
+	Cuboid2 <Cuboid2>
+	Space Invaders <SpaceInvaders>
+	How To <HowTo>
+	Arriccio <Arriccio>
 	Impressum
 
 ..
@@ -53,7 +50,8 @@ If you encounter any issues please send me an e-mail, so I can correct it: uotbw
 
 News
 ----
-- Sep, 14th - HGamer3D presented at `HAL 2016`_, see `abstract`_ and `slides`_.
+- April, 10th, 2017 - updated Website
+- Sep, 14th, 2016 - HGamer3D presented at `HAL 2016`_, see `abstract`_ and `slides`_.
 
 .. _`HAL 2016`: http://hal2016.haskell.org
 .. _`abstract`: http://hal2016.haskell.org/program.html#althainz-talk

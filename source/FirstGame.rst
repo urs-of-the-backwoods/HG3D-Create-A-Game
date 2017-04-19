@@ -1,73 +1,65 @@
-Your First Haskell Game
-#######################
+Start Programming
+#################
 
-You are sitting in front of your computer, a new Haskell book at your side and wondering, what to do next? Sure you expect some setup to be done, to get tools installed, libraries installed, editors installed and more of that. So I have good and bad news. The bad news is, we only will create a template based program with a spinning cube in this section and nothing else. The good news is, it will take less then 15 min.
+You are sitting in front of your computer, the fancy GUI showing a Web-Browser and what next? How to start?
 
-Quick Start
------------
+To program a game, you will need a lot of tools. You will need a compiler, which translates program source code into a runnable executable. 
+You will also need something to edit your program files with, an editor and a kind of command center from which to coordinate all activities.
+Typically the command center can be a so called IDE (integrated development environment) or you also can simply use the `command line`_, typing
+in commands in a terminal-like window. You will need libraries for graphics, sound, joystick or keyboard input and so on. Those libraries are
+mostly referred to as "game engine". And you need media, the graphics, sounds and similar artefacts, which build the game content.
 
-The following commands will get you very quickly to a running program. 
+|HGamer3D| makes it easy to setup the basic tools for a fast start. Follow the steps below, to create a first game from an existing project 
+template. 
 
-First, download the ``aio`` tool and install it in your execution path. (Being concerned about security, you can also download the `source`_, check it carefully and compile it yourself.)
+**Create Directory With Tooling**
 
-* `Arriccio - Linux Version Download`_
-* `Arriccio - Windows Version Download`_
-* `Arriccio - OS X Version Download`_
+Please create a new directory either in the explorer of your OS or with the command line. Then download the tools from the following links:
 
-.. _`Arriccio - Linux Version Download`: http://www.hgamer3d.org/downloads/aio-amd64-linux-0.1.2.tar.gz
-.. _`Arriccio - Windows Version Download`: http://www.hgamer3d.org/downloads/aio-amd64-windows-0.1.2.zip
-.. _`Arriccio - OS X Version Download`: http://www.hgamer3d.org/downloads/aio-amd64-darwin-0.1.2.tar.gz
+* `Windows Tools Download`_
+* `Mac Tools Download`_
+* `Linux Tools Download`_
 
-.. note:: 64 bit only at the moment (due to time constraints in setting up another 3 environments, sorry)
+.. _`Windows Tools Download`: http://www.hgamer3d.org/downloads/HGamer3D-Haskell-Windows-0.8.zip
+.. _`Mac Tools Download`: http://www.hgamer3d.org/downloads/HGamer3D-Haskell-Mac-0.8.tar.gz
+.. _`Linux Tools Download`: http://www.hgamer3d.org/downloads/HGamer3D-Haskell-Linux-0.8.tar.gz
+.. _`command line`: HowTo.html
+.. _`more details about arriccio`: Arriccio.html
 
-.. _`fresco`: http://github.com/urs-of-the-backwoods/fresco
-.. _`source`: http://github.com/urs-of-the-backwoods/fresco/blob/master/arriccio/main.go
+Move or copy the downloaded zip-file to the new directory and extract the content there. Finally, start a `command line`_ and cd into the freshly created directory with the tools.
 
-Second, install Haskell.
+**Build and run the example game**
 
-.. code-block:: console
+If you list your directory content now, you see a number of files needed for your first game project and some batch files, providing you the neccessary commands to start programming. The example game project consist of the game source code, the ``game.hs`` file. Files giving instructions
+to the compiler, how to compile the game (``game.cabal``, ``stack.yaml``) and some auxiliary files.
 
-	aio http://www.hgamer3d.org/component/Stack setup --resolver lts-5.8
+The following batch files provide the functionality listed in the table below:
 
-Third, create a test directory, cd into it and install a program skeleton to start with.
+================ ================================= ==================================================
+Cmd/Batch        Function                          Parameters
+================ ================================= ==================================================
+``install``      installs Haskell                  none
+``edit``         opens an editor window            files to open, for example "edit game.hs"
+``build``        runs the Haskell compiler         none, uses game.hs
+``run``          starts the compiled program       none, uses game.exe
+================ ================================= ==================================================
 
-.. code-block:: console
+You first need to install the Haskell compiler by typing ``install`` (and pressing ``Enter``). After having accomplished this you can go right ahead and build and run your first program by issuing the ``build`` and then then the ``run`` command.
 
-	aio http://www.hgamer3d.org/component/CreateProject
+A spinning 3D cube should show up in a HGamer3D program window. Congratulations! You just managed to get your first Haskell game programe
+to compile and run on your own device. Of course this was still an existing example program. But now you have all the tools available
+to start your own experiments with Haskell and 3D game programming.
 
-.. note:: CreateProject works in the current directory and overwrites existing files, so please only use it in a new, freshly created and empty directory!
+.. image:: images/bluecube.jpg
+   :width: 40%
 
-Fourth, build and run the program.
+.. note:: You might have noticed, that the batch files use a program in the ``tools`` folder called ``aio``. This executable downloads all components needed and also runs them (`more details about arriccio`_).
 
-.. code-block:: console
+**Examining the Code**
 
-	./build
-	./run
+If you want to have a first preview into a functioning code snippet fire up the editor and have a look at the code with ``edit game.hs``.
 
-You should see a spinning cube! Wow that was fast. To be fair there is some time needed during execution of the commands to install things and you need to answer ``yes`` to all install questions. Details on the arriccio tool can be found in the next section, now we shortly look at the pieces, which you just used.
-
-
-Haskell
-~~~~~~~
-
-To setup Haskell we used ``aio`` to get us a bundled version of `The Haskell Tool Stack`_. It might be a good idea to get some background knowledge on the stack tool itself from `The Haskell Tool Stack`_ website. For |HGamer3D| a specific version of the Haskell compiler was setup by using a specific resolver version in the commands given above. Stack has some profound advantages over alternative build methods for Haskell code. It was invented specifically to fight the Haskell version of dll hell, the so-called cabal hell. Therefore it is used here. 
-
-.. _`The Haskell Tool Stack`: http://www.haskellstack.org
-
-
-Spinning Cube Code
-------------------
-
-Now let's have a look at the code of the spinning cube to get some ideas, how game programming with |HGamer3D| looks like. For example you can fire up the editor and inspect the code directly.
-
-.. code-block:: console
-
-	aio Edit game.hs
-
-Or you have a look at the code as it is copied below. In the beginning there is one extension used, ``OverloadedStrings`` which is pretty harmless, it is needed to convert code strings to ``Text`` which is used througout the library. The imports are done, the main one being the one importing the library. 
-
-All the game logic is inside the function ``gameLogic`` which takes one parameter ``hg3d``. This parameter contains hidden data on an initialized system and is handed in to the function from the ``runGame``` function in ``main``. First comes the setup of entities like camera, text and the cube geometry 
-with ``newE`` calls handing in parameters as a list of special key value pairs. Those pairs are typed behind the scenes to have the correct mapping between key and value type. Rotation is done in a separately started thread, accessing the cube entity - called ``eGeo``. Finally the game loop is run in the main function by calling the ``gameLogic`` function from ``runGame`` and that's it.  
+Do you recognize the typical Haskell program structure? The ``Main`` module declaration and imports at the beginning, a function called ``gameLogic`` and one called ``main``? Try to modify this code in the editor, for example, change the color to green, re-compile the code with ``build`` and run it with ``run``. 
 
 .. code-block:: haskell
 
@@ -118,5 +110,6 @@ with ``newE`` calls handing in parameters as a list of special key value pairs. 
 	main = do 
 	    runGame standardGraphics3DConfig gameLogic (msecT 20)
 	    return ()
+
 
 .. include:: GeneralInclusions
