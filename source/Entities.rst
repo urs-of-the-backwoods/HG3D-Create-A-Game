@@ -22,7 +22,7 @@ Example
 
 Let's have a closer view on them by looking at an example. Below you will find the code to create a cube in |HGamer3D|. It is composed of an IO call to ``newE`` and an argument list of key value pairs. Each key denotes a specific type and each value instantiates this type with a corresponding setting. 
 
-.. literalinclude:: ../../HGamer3D/examples/RotatingCube.hs
+.. literalinclude:: ../../HGamer3D/samples/RotatingCube.hs
     :start-after: -- HGamer3D website, entities and events, example entity
     :end-before: -- end of website text
     :language: Haskell
@@ -42,7 +42,7 @@ Those functions are living in the IO Monad and they are fully thread safe, they 
 
 Now let's see this in action: 
 
-.. literalinclude:: ../../HGamer3D/examples/RotatingCube.hs
+.. literalinclude:: ../../HGamer3D/samples/RotatingCube.hs
     :start-after: -- HGamer3D website, entities and events, rotation explanation
     :end-before: -- end of website text
     :language: Haskell

@@ -112,7 +112,7 @@ Using the operators above is resulting in a lot of nested lambda expressions, an
 Do notation is provided by the Haskell compiler and interpreter and it is just syntactic sugar for using the bind and sequence operators directly. It is immensly useful but there are some pitfalls. Let's explain the main elements in an example.
 
 
-.. literalinclude:: ../../HGamer3D/examples/SpaceInvaders.hs
+.. literalinclude:: ../../HGamer3D/samples/SpaceInvaders.hs
     :start-after: -- HGamer3D website, actions and do notation, first example
     :end-before: -- end of website text
     :language: Haskell

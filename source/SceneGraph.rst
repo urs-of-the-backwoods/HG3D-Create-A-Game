@@ -12,7 +12,7 @@ To structure all the 3d elements in a scene and to enable efficient manipulation
 
 The code to make all this possible is shown in the example below:
 
-.. literalinclude:: ../../HGamer3D/examples/RotatingCube2.hs
+.. literalinclude:: ../../HGamer3D/samples/RotatingCube2.hs
     :start-after: -- HGamer3D website, scene graph, complete example
     :end-before: -- end of website text
     :language: Haskell

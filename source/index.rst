@@ -50,6 +50,7 @@ If you encounter any issues please send me an e-mail, so I can correct it: uotbw
 
 News
 ----
+- Sep, 2017 - Version 0.9 - updated Website
 - April, 10th, 2017 - updated Website
 - Sep, 14th, 2016 - HGamer3D presented at `HAL 2016`_, see `abstract`_ and `slides`_.
 

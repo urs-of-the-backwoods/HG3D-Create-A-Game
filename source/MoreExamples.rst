@@ -16,11 +16,11 @@ SoundEffects       How to program sound                     `SoundEffects on git
 SpaceInvaders      A comprehensive space invaders clone     `SpaceInvaders on github`_ 
 ================== ======================================== ======================================
 
-.. _`Cuboid2 on github`: https://github.com/urs-of-the-backwoods/HGamer3D/blob/master/examples/Cuboid2.hs
-.. _`Gui1 on github`: https://github.com/urs-of-the-backwoods/HGamer3D/blob/master/examples/Gui1.hs
-.. _`Materials on github`: https://github.com/urs-of-the-backwoods/HGamer3D/blob/master/examples/Materials.hs
-.. _`RotatingCube2 on github`: https://github.com/urs-of-the-backwoods/HGamer3D/blob/master/examples/RotatingCube2.hs
-.. _`SoundEffects on github`: https://github.com/urs-of-the-backwoods/HGamer3D/blob/master/examples/SoundEffects.hs
+.. _`Cuboid2 on github`: https://github.com/urs-of-the-backwoods/HGamer3D/blob/master/samples/Cuboid2.hs
+.. _`Gui1 on github`: https://github.com/urs-of-the-backwoods/HGamer3D/blob/master/samples/Gui1.hs
+.. _`Materials on github`: https://github.com/urs-of-the-backwoods/HGamer3D/blob/master/samples/Materials.hs
+.. _`RotatingCube2 on github`: https://github.com/urs-of-the-backwoods/HGamer3D/blob/master/samples/RotatingCube2.hs
+.. _`SoundEffects on github`: https://github.com/urs-of-the-backwoods/HGamer3D/blob/master/samples/SoundEffects.hs
 .. _`SpaceInvaders on github`: https://github.com/urs-of-the-backwoods/SpaceIn3d
 
 To compile the examples, you need to:

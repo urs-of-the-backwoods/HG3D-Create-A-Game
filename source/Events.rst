@@ -10,14 +10,14 @@ Sending events is actually nothing special in the API. You set a specific compon
 
 The following code creates an entity with a combination of a button and a sound source. This entity will be bound to a variable called ``sound`` in the code following hereafter.
 
-.. literalinclude:: ../../HGamer3D/examples/SoundEffects.hs
+.. literalinclude:: ../../HGamer3D/samples/SoundEffects.hs
     :start-after: -- HGamer3D website, events, create sound source
     :end-before: -- end of website text
     :language: Haskell
 
 On a button click (explanation for registerCallback, see below) an event is send to the ``sound`` source by simply setting the ``ctPlayCmd`` component to ``Play`` with the code part ``setC sound ctPlayCmd Play``. 
 
-.. literalinclude:: ../../HGamer3D/examples/SoundEffects.hs
+.. literalinclude:: ../../HGamer3D/samples/SoundEffects.hs
     :start-after: -- HGamer3D website, events, send play event
     :end-before: -- end of website text
     :language: Haskell
@@ -30,14 +30,14 @@ In |HGamer3D| the functionality to receive events is based on detecting the chan
 
 As a first example consider the following code snippet, which programs an exit button:
 
-.. literalinclude:: ../../HGamer3D/examples/TestDel.hs
+.. literalinclude:: ../../HGamer3D/samples/TestDel.hs
     :start-after: -- HGamer3D website, events, register callback on button 1
     :end-before: -- end of website text
     :language: Haskell
 
 This code creates a button with the label *Exit*. To get events from this button, we can create a callback to the ``ctButton`` object/property.
 
-.. literalinclude:: ../../HGamer3D/examples/TestDel.hs
+.. literalinclude:: ../../HGamer3D/samples/TestDel.hs
     :start-after: -- HGamer3D website, events, register callback on button 2
     :end-before: -- end of website text
     :language: Haskell
@@ -50,14 +50,14 @@ Key Events
 
 In case of GUI elements the callback can be registered on the value component of the GUI element. But what about other input types, for example key input? There is no component for a specific key, is it? For this scenario, you need to create an ``InputEventHandler`` component and a property for the type of events you would like to receive. See the code below.
 
-.. literalinclude:: ../../HGamer3D/examples/Cuboid2.hs
+.. literalinclude:: ../../HGamer3D/samples/Cuboid2.hs
     :start-after: -- HGamer3D website, events, event listener for keys
     :end-before: -- end of website text
     :language: Haskell
 
 An entity is created with an ``ctInputEventHandler`` component and a ``ctKeyEvent`` property. Now events can be registered on the ``ctKeyEvent`` property:
     
-.. literalinclude:: ../../HGamer3D/examples/Cuboid2.hs
+.. literalinclude:: ../../HGamer3D/samples/Cuboid2.hs
     :start-after: -- HGamer3D website, events, register callback for keys
     :end-before: -- end of website text
     :language: Haskell

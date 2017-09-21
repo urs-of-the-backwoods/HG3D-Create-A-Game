@@ -14,15 +14,17 @@ To ease up game programming with Haskell, I created a small utility layer, calle
 
 The program arriccio can be found in the "tools" folder, it is named "aio".
 
-Fire up arriccio without parameter and you will get a short helping introduction. If you look closer at the arriccio commands you'll see that most of them take the url or a name - an alias - as parameter. The primary key for distinguishing components is the url. Since url's tend to be long and difficult to remember, you can attach an alias for day to day use with arriccio. Please do that now for a number of components which you will need during the next pages. Please enter the following commands to assign the alias names:
+Fire up arriccio without parameter and you will get a short helping introduction. If you look closer at the arriccio commands you'll see that most of them take the url or a name - an alias - as parameter. The primary key for distinguishing components is the url. Since url's tend to be long and difficult to remember, you can attach an alias for day to day use with arriccio. During the initial setup, some shortcuts have been set already, so if you start ``aio list alias`` you will get a list of already 'pre-defined' components.
 
 .. code-block:: console
 
-	aio alias Stack http://www.hgamer3d.org/component/Stack
-	aio alias CreateProject http://www.hgamer3d.org/component/CreateProject
-	aio alias Edit http://www.hgamer3d.org/component/Edit
-	aio alias Run http://www.hgamer3d.org/component/Run
-	aio alias Lua http://www.hgamer3d.org/component/Lua
+	Lua  -  http://www.hgamer3d.org/tools/Lua.0717
+	Run  -  http://www.hgamer3d.org/tools/Run.0517
+	Stack  -  http://www.hgamer3d.org/tools/Stack.0617
+	3DEdit  -  http://www.hgamer3d.org/tools/Urho3DEditor-1.6
+	AssetImporter  -  http://www.hgamer3d.org/tools/AssetImporter-1.6
+	CreateProject  -  http://www.hgamer3d.org/tools/CreateProject.0917
+	Edit  -  http://www.hgamer3d.org/tools/Edit.0917
 
 Let's try now one of those components in isolation for purpose of getting more used to arriccio. Simply issue the following command in a shell:
 
@@ -51,31 +53,13 @@ Use in HGamer3D
 
 In |HGamer3D| different components are implemented for
 
-- The underlying C++ game engine (``Engine``)
-- The C++ binding layer towards the runtime (``GameEngineGio``)
-- An intermediate runtime, making the binding threadsafe (``Intonaco``)
-- The final setup which runs the Haskell program binary with information on where to find dependencies (``Run``)
-- Media Packs for media files used by the game engine and the games (``MediaPack1``, ``MediaPlain``)
+- The underlying C++ game engine (``Urho3D-1.6``)
+- The C++ binding layer towards the runtime (``HG3DEngineGio.0517``)
+- An intermediate runtime, making the binding threadsafe (``Intonaco.0517``)
+- The final setup which runs the Haskell program binary with information on where to find dependencies (``Run.0517``)
+- Media Packs for media files used by the game engine and the games (``MediaPack1.0617``)
 
 To separate specifically the Haskell binary from the underlying C++ technologies, this binary loads libraries dynamicall with ``dlopen``. The information, where to find the needed libraries is provided by mechanisms implemented in the arriccio tool. This has the advantage that the Haskell programs itself do not depend on statically linked C, C++ libraries, there is no library mentioned in the cabal file, which increases the maintainability of the overall solution.
-
-The dependency tree looks like this:
-
-.. code-block:: console
-
-	Run
-	|
-	+--Intonaco
-	|
-	+--MediaPack1
-	|
-	+--GameEngineGio
-	     |
-	     +--Engine
-	          |
-	          +--MediaPlain
-
-
 
 Components
 ----------
@@ -84,49 +68,26 @@ If you are going to stick components together to one working program, you need a
 
 **The Component Url**
 
-Components are uniquely identified by their component url. For example the ``Run`` component of |HGamer3D| is identified by ``http://www.hgamer3d.org/component/Run``. This url is used in all places where a reference to this component needs to be made. As a component provides one unique piece of functionality, the name reflects the action or content of the specific component. In the case of the ``Run`` component it is obious that this component enables to run HGamer3D programs. The aio program can be used to start those component, the command:
+Components are uniquely identified by their component url. For example the ``Run.0517`` component of |HGamer3D| is identified by ``http://www.hgamer3d.org/tools/Run.0517``. This url is used in all places where a reference to this component needs to be made. As a component provides one unique piece of functionality, the name reflects the action or content of the specific component. In the case of the ``Run.0517`` component it is obious that this component enables to run HGamer3D programs. The aio program can be used to start those component, the command:
 
 .. code-block:: console
 
-	aio http://www.hgamer3d.org/component/Run ./game
+	aio http://www.hgamer3d.org/tools/Run.0517 ./game
 
-starts the ``Run`` component and invokes the program ``./game`` to execute it. The reason why a component is started, to start another program is simple, it prepares the environment in a way, that ``./game`` is able to find its dependencies, namely all the media files and the |HGamer3D| runtime libraries.
+starts the ``Run.0517`` component and invokes the program ``./game`` to execute it. The reason why a component is started, to start another program is simple, it prepares the environment in a way, that ``./game`` is able to find its dependencies, namely all the media files and the |HGamer3D| runtime libraries.
 
 **The arriccio.toml file**
 
 If you open one of the component url's in your browser you will see, that there is specific information contained in the file, which is opened. This file is called the ``arriccio.toml`` file and the format of it is toml a kind of dialect of yaml. So behind each component url an arriccio.toml file is waiting with meta-information, describing the component. This information is read by the arriccio tool and gives all needed information to execute the component and to resolve any additional dependencies. To give you a deeper understanding of arriccio, we will go through the structure of this file below.
 
-Let's have a look at the first lines of the ``GameEngineGio`` component arriccio.toml file:
+Let's have a look at the first lines of the ``HG3DEngineGio.0517`` component arriccio.toml file:
 
 .. code-block:: console
 
-	# arriccio.toml file for HGamer3D - game engine gio
-
-	Id = "http://www.hgamer3d.org/component/GameEngineGio"
-	Purpose = "HGamer3D Game Engine Gio"
-	Description = """
-	  The fresco runtime component to bind game engine functionality.
-	"""
-
-	License = "Apache 2.0 License"
-
-	FullLicenseText = """
-	Copyright 2016 Peter Althainz
-
-	Licensed under the Apache License, Version 2.0 (the "License");
-	you may not use this file except in compliance with the License.
-	You may obtain a copy of the License at
-
-	    http://www.apache.org/licenses/LICENSE-2.0
-
-	Unless required by applicable law or agreed to in writing, software
-	distributed under the License is distributed on an "AS IS" BASIS,
-	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	See the License for the specific language governing permissions and
-	limitations under the License.
-	"""
-
-	signingkey = "https://www.github.com/urs-of-the-backwoods.keys"
+	id-url = "http://www.hgamer3d.org/component/HG3DEngineGio.0517"
+	description = "HGamer3D fresco component which delivers the C++ binding towards the Urho3D engine."
+	license-short = "Apache 2.0 License"
+	signing-key = "https://www.github.com/urs-of-the-backwoods.keys"
 
 
 Pretty self-explanatory, is it? The header of the component metadata gives information about the id, the license and the purpose of the component. It also contains a signing-key url. This url contains the public key of a cryptographic key pair and is used by arriccio to verify that the component is originating from the author who owns the corresponding private key. In this case it says that the github user urs-of-the-backwoods signed the arriccio.toml file with his private key. Arriccio checks this before doing anyhting with the component.
@@ -136,34 +97,44 @@ Now let's have a look at the further details of the ``arriccio.toml`` file.
 
 .. code-block:: console
 
-	#
-	# version 1
-	#
-
-	# Linux, 64 Bit, version 1.0.2
-
-	[[Impls]]
-	  location = "http://www.hgamer3d.org/downloads/gamegio-amd64-linux-1.0.2.tar.gz"
-	  signingkey = "https://www.github.com/urs-of-the-backwoods.keys"
-	  version = "1.0.2"
+	[[implementation]]
 	  architecture = "amd64"
-	  os = "linux"
+	  operating-system = "windows"
+	  archive-download-location = "http://www.hgamer3d.org/downloads/gamegio-amd64-windows-2.0.0.tar.gz"
 
-	[[Impls.dependencies]]
-	  Id = "http://www.hgamer3d.org/component/Engine"
-	  VersionConstraint = "2.0"
-	  Environment = ["add-val LD_LIBRARY_PATH /usr/lib/x86_64-linux-gnu", "add-path LD_LIBRARY_PATH ."]
+	[[implementation.dependency]]
+	  id-url = "http://www.hgamer3d.org/tools/Urho3D-1.6"
+	  environment-settings = ["add-path PATH ./bin"]
+
+	[[implementation]]
+	  architecture = "amd64"
+	  operating-system = "linux"
+	  archive-download-location = "http://www.hgamer3d.org/downloads/gamegio-amd64-linux-2.0.0.tar.gz"
+
+	[[implementation.dependency]]
+	  id-url = "http://www.hgamer3d.org/tools/Urho3D-1.6"
+	  environment-settings = ["add-path LD_LIBRARY_PATH ./bin"]
+
+	[[implementation]]
+	  architecture = "amd64"
+	  operating-system = "darwin"
+	  archive-download-location = "http://www.hgamer3d.org/downloads/gamegio-amd64-darwin-2.0.0.tar.gz"
+
+	[[implementation.dependency]]
+	  id-url = "http://www.hgamer3d.org/tools/Urho3D-1.6"
+	  environment-settings = ["add-path LD_LIBRARY_PATH ./bin"]
+		
 
 
-This now is much more interesting. You need to get a little knowledge on toml, before going ahead. The double square brackets indicate arrays with an array entry below it. It is also important to understand that although all blocks have the same indentation the top lines ``Impls`` and ``Impls.dependencies`` indicate that the dependencies are actually part of the Impls, so you need to read this as if the dependencies are one level below the Impls.
+This now is much more interesting. You need to get a little knowledge on toml, before going ahead. The double square brackets indicate arrays with an array entry below it. It is also important to understand that although all blocks have the same indentation the top lines ``implementation`` and ``implementation.dependency`` indicate that the dependencies are actually part of the implementation, so you need to read this as if the dependencies are one level below the implementations.
 
-So what does it mean? ``Impls`` means *Implementation*. So each ``Impls`` section describes one specific implementation of the component. So in this case, the first lines contain the specification for an implmentation, which runs on machines with Linux as its OS and an *amd64* cpu architecture (essentially 64 bit). The version of this implementation is ``1.0.2``. Finally there is a location indication and a signing-key again which gives the data of the implementation. This data is downloaded by arriccio and cached on the local system so it can be used by other components or directly by arriccio if this component is started.
+So what does it mean? Each ``implementation`` section describes one specific implementation of the component. So in this case, the first lines contain the specification for an implmentation, which runs on machines with Linux as its OS and an *amd64* cpu architecture (essentially 64 bit). Finally there is a location indication and a signing-key again which gives the data of the implementation. This data is downloaded by arriccio and cached on the local system so it can be used by other components or directly by arriccio if this component is started.
 
-Below the implementation you will find its dependencies. And this is the most important part in this file. Each specific implementation may depend on other components. Those dependencies are specified by the id of the component, which is needed, its version region and a field called ``Environment``. The dependencies of the ``GameEngineGio`` component is only one component, the ``Engine`` component.
+Below the implementation you will find its dependencies. And this is the most important part in this file. Each specific implementation may depend on other components. Those dependencies are specified by the id of the component, which is needed, its version region and a field called ``Environment``. The dependencies of the ``HG3DEngineGio.0517`` component is only one component, the ``Urho3D-1.6`` component.
 
-The environment field gives information which is used by arriccio to interconnect the dependencies with the components. Since components have no knowledge about each other, we need to tell the ``GameEngineGio`` component about the existence and location of the ``Engine`` component. This is done at runtime by the arriccio tool. This tool populates the environment with entries giving information about the location of the dependencies. In the case of the ``Engine`` dependency, arriccio modifies an environment variable called ``LD_LIBRARY_PATH`` and adds to it the location where arriccio downloaded the ``Engine`` component. Upon start, the ``GameEngineGio`` component is reading this environment variable and therefore is able to locate the ``Engine`` component. This is a mechanism called *dependency injection* and it decouples components from each other.
+The environment field gives information which is used by arriccio to interconnect the dependencies with the components. Since components have no knowledge about each other, we need to tell the ``HG3DEngineGio.0517`` component about the existence and location of the ``Urho3D-1.6`` component. This is done at runtime by the arriccio tool. This tool populates the environment with entries giving information about the location of the dependencies. In the case of the ``Urho3D-1.6`` dependency, arriccio modifies an environment variable called ``LD_LIBRARY_PATH`` and adds to it the location where arriccio downloaded the ``Urho3D-1.6`` component. Upon start, the ``HG3DEngineGio.0517`` component is reading this environment variable and therefore is able to locate the ``Urho3D-1.6`` component. This is a mechanism called *dependency injection* and it decouples components from each other.
 
-And what is this specific component about? The ``GameEngineGio`` component is the C++ binding library, which abstracts functionality from the Urho3D ++ game engine to be used later by the Haskell binding. It is a dynamic library and it uses the Urho3D engine. The latter is actually contained in the ``Engine`` component, so it is clear that the binding library needs the Urho3D engine as a pre-requisite. Arriccio also makes sure, that only the correct versions are interconnected and the fields ``os`` and ``architecture`` make sure, that only components which can be run by the underlying hardware are chosen. As you can see, this also enables one component ``arriccio.toml`` file to specify all implementations for all supported platforms, so there is really just one ``arriccio.toml`` file for one component and it contains all information for all implementations. If you look into the ``http://www.hgamer3d.org/component/GameEngineGio`` component, you will see that there are additional entries for the Windows and OS X platforms.
+And what is this specific component about? The ``HG3DEngineGio.0517`` component is the C++ binding library, which abstracts functionality from the Urho3D ++ game engine to be used later by the Haskell binding. It is a dynamic library and it uses the Urho3D engine. The latter is actually contained in the ``Urho3D-1.6`` component, so it is clear that the binding library needs the Urho3D engine as a pre-requisite. Arriccio also makes sure, that only the correct versions are interconnected and the fields ``operating-system`` and ``architecture`` make sure, that only components which can be run by the underlying hardware are chosen. As you can see, this also enables one component ``arriccio.toml`` file to specify all implementations for all supported platforms, so there is really just one ``arriccio.toml`` file for one component and it contains all information for all implementations. If you look into the ``http://www.hgamer3d.org/component/HG3DEngineGio.0517`` component, you will see that there are additional entries for the Windows and OS X platforms.
 
 
 Running Components
@@ -172,40 +143,12 @@ Running Components
 The arriccio tool runs components. It does so by following the sequence below:
 
 - Read each components ``arriccio.toml`` file in the complete tree. Check signatures.
-- Check if there is a combined set of implementations, which are fitting the current platform, architecture and version constraints.
-- Take the most up to date versions, fitting the version constraints.
+- Check if there is a combined set of implementations, which are fitting the current platform and architecture constraints.
 - Download the component implementations of the identified target set to the internal cache, if not already done so. Ask for permission beforehand.
 - Check signatures of downloaded components.
 - Set all needed environment variables to inject the information on location and parameters of dependencies.
 - Execute the given executable in the context of all dependencies, or the command given in the component meta-data itself.
 
-
-**Version Constraints**
-
-Arriccio uses the given versions to check, which components play well together. According to semantic versioning, the following rules are built-in into the tool and cannot be changed. This means, you need to assign the versions carefully and think beforehand when releasing new versions of components. You also need to bump the major version, when introducing incompatibilities.
-
-- a version needs to have the format MAJOR.MINOR.PATCH .
-- a version constraint can limit the version information to less accuracy, specifying only MAJOR.MINOR or even MAJOR only.
-- a version constraint fits a version if MAJOR numbers are equal and one of two cases apply:
-- either the constrain does contain a PATCH number, then version and version constraint need to be identical 
-- or the constraint does not contain a PATCH number, then the version need to be larger or equal to the version constraint
-- the highest version, which fulfills the constraints is taken
-
-Some examples migth be appropriate:
-
-======== ============ ==== =======================
-Version  Constraint   Ok   Why?
-======== ============ ==== =======================
-0.2.1    0.2          Yes  version larger then constraint
-4.2.1    3.2          No   MAJOR does not match
-1.3.2    1.3.0        No   PATCH present in constraint, therefore version need to be identical to constraint
-2.3.4    2.2          Yes  MAJOR equal and version larger then constraint
-2.1.4    2.2          No   MAJOR equal but version smaller then constraint
-======== ============ ==== =======================
-
-*Remark*
-
-There is a tendency in the open source software community to not strictly follow the semantic versioning, but instead only bump the major version number at an outstanding new release each 5-10 years and keep the minor version number as main indicator for new content. This is not working in the case of arriccio at all! Rather you need to bump the major version quite often, since each time you are introducing incompatibilities between versions of components - for the clients of the component - you need to update the MAJOR number. Therefore a good approach is to not be afraid of having higher MAJOR version numbers. You can - and actually should - view the component version as being independent from the software version of the underlying software, which is used in the component.
 
 **Internal Cache**
 
@@ -225,54 +168,17 @@ Arriccio uses ssh keys and hashing, to generate a signature for component url fi
 
 The resulting signature file needs to be placed at the same location as the file itself. You can check a signature with the ``aio verify`` command. If you place the public key somewhere in the internet everybody can check if the file has been signed by yourself. Arriccio does those checks automatically by comparing if the meta-data files and the implementation content files have a signature file at the same url (with appended ``.sig`` extension) which matches the data and the public key, given in the arriccio.toml file.
 
+**Versioning**
+
+to be done
+
 **Execution and Commands**
 
-Once arriccio has gathered the information about components and dependencies correctly, downloaded the component data, which will be for a part also some program and also set the right environment variables what does it do, to start the initial component, given in the ``aio`` command? There are two options, which are working. Either there is a ``Command`` field in the implementation section of the component. In this case this command is executed with the directory of the downloaded component cache attached to the front. Remaining parameters are handed over to this started program. Or there is no ``Command`` field in this case, the first parameter is supposed to be a runnable program, which is started. In both cases the context of the program will contain the set environmen variables.
+to be done
 
 **Environment Parameters**
 
-There are a number of possibilities, to set environment parameters, in the section of the implementation or its dependencies. Let's have a look at one example:
-
-.. code-block:: console
-
-	# first example, Run component
-
-	[[Impls]]
-	  version = "1.0.0"
-	  architecture = "*"
-	  os = "*"
-
-	[[Impls.dependencies]]
-	  Id = "http://www.hgamer3d.org/component/MediaPack1"
-	  VersionConstraint = "1.0"
-	  Environment = ["add-path HG3D_RESOURCE_PATH ."]
-
-	[[Impls.dependencies]]
-	  Id = "http://www.hgamer3d.org/component/Intonaco"
-	  VersionConstraint = "1.0"
-	  Environment = ["add-path INTONACO intonaco.gio"]
-
-	[[Impls.dependencies]]
-	  Id = "http://www.hgamer3d.org/component/GameEngineGio"
-	  VersionConstraint = "1.0"
-	  Environment = ["add-path GIORNATA game_engine.gio"]	
-
-	# second example, GameEngineGio component
-
-	[[Impls]]
-	  location = "http://www.hgamer3d.org/downloads/gamegio-amd64-linux-1.0.2.tar.gz"
-	  signingkey = "https://www.github.com/urs-of-the-backwoods.keys"
-	  version = "1.0.2"
-	  architecture = "amd64"
-	  os = "linux"
-
-	[[Impls.dependencies]]
-	  Id = "http://www.hgamer3d.org/component/Engine"
-	  VersionConstraint = "2.0"
-	  Environment = ["add-val LD_LIBRARY_PATH /usr/lib/x86_64-linux-gnu", "add-path LD_LIBRARY_PATH ."]	
-
-As you can see in the both examples, the syntax of the ``Environment`` setting is an array of strings and each string has the following possible syntax: ``cmd <environment-variable> <value> [sep]``. Cmd can be ``add-val`` or ``add-path``. The meaning of those commands is simple, add-val adds another value to the given environment variable, with the directory separator or, in case a separator is given, with this separator. Add-path does the same, but it prepends the path to dependency implementation directory in the cache to the given value, so that it can be found within the directory structure of the machine on which the command is running.
-
+to be done
 
 
 Build your own components
