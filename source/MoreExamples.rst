@@ -27,7 +27,7 @@ To compile the examples, you need to:
 
 - Download the ``raw`` version of the file by clicking the appropriate link in the github interface
 - Rename the file to ``game.hs`` in the project folder
-- Run ``build`` and then ``run``
+- Run ``aio Stack install --local-bin-path .`` and then ``aio Run ./game``
 
 Alternatively, you can figure out, how the build batch file work and issue the same command on the downloaded file. In the case of the space invader example, you can clone the complete repo into a new folder and use the build and run batches within that cloned folder.
 

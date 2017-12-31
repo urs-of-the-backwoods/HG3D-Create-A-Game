@@ -11,30 +11,27 @@ To ease up game programming with Haskell, I created a small utility layer, calle
 .. _`dependency injection`: https://en.wikipedia.org/wiki/Dependency_injection
 .. _`0install`: http://0install.net
 
-
-The program arriccio can be found in the "tools" folder, it is named "aio".
-
 Fire up arriccio without parameter and you will get a short helping introduction. If you look closer at the arriccio commands you'll see that most of them take the url or a name - an alias - as parameter. The primary key for distinguishing components is the url. Since url's tend to be long and difficult to remember, you can attach an alias for day to day use with arriccio. During the initial setup, some shortcuts have been set already, so if you start ``aio list alias`` you will get a list of already 'pre-defined' components.
 
 .. code-block:: console
 
-	Lua  -  http://www.hgamer3d.org/tools/Lua.0717
+	Install  -  http://www.hgamer3d.org/tools/Install.1217
 	Run  -  http://www.hgamer3d.org/tools/Run.0517
 	Stack  -  http://www.hgamer3d.org/tools/Stack.0617
 	3DEdit  -  http://www.hgamer3d.org/tools/Urho3DEditor-1.6
 	AssetImporter  -  http://www.hgamer3d.org/tools/AssetImporter-1.6
-	CreateProject  -  http://www.hgamer3d.org/tools/CreateProject.0917
+	Create  -  http://www.hgamer3d.org/tools/CreateProject.1217
 	Edit  -  http://www.hgamer3d.org/tools/Edit.0917
 
 Let's try now one of those components in isolation for purpose of getting more used to arriccio. Simply issue the following command in a shell:
 
 .. code-block:: console
 
-	aio Lua
+	aio 3DEdit
 
 What happens? The first time you try to run a component with arriccio it needs to download the component to your machine. So the tool comes back with a question and asks, if you are ok with that. Have a closer look, it gives you a tar.gz filename it is going to download and a signing key. This signing key identifies the person who created the downloaded data, which in this case is me, I signed the components from |HGamer3D| with my key. Arriccio will check if the data has not being messed up somehow by verifying the signature.
 
-If you answer with "yes" a download will appear, and after that the command line of the lua interpreter is displayed. You can try some lua commands and exit with Ctrl-D (Ctrl-C on Windows). 
+If you answer with "yes" a download will appear, and after that the 3DEditor is displayed (taken from the Urho3D project). 
 
 Try some other commands of arriccio, for example the license command which gives you licensing information on the component you name.
 

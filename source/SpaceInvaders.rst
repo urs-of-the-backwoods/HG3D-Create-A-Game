@@ -27,27 +27,15 @@ With the following features the `space invaders clone`_ is a show-case for game 
 Howto Play
 ----------
 
-- install aio (see :ref:`arriccio`)
-- run the command ``aio start http://www.hgamer3d.org/game/SpaceIn3d``
-- allow the downloads (only first time, next time it is cached)
-- you might put the ``aio start ..`` command in a batch file or start link
 - try the "fly" feature by hitting ``F1`` and using the keys ``W``, ``A``, ``S``, ``D``, ``Q``, ``up``, ``down``
 
 
 Howto Compile
 -------------
 
-- create a new directory and cd into it
-- follow the steps below:
+- clone the github repository and follow the compilation steps given there: `SpaceIn3d`_
 
-.. code-block:: console
-
-	git clone http://github.com/atzeus/HMap
-	git clone http://github.com/urs-of-the-backwoods/SpaceIn3d
-	cd SpaceIn3d
-	aio http://www.hgamer3d.org/component/Stack install --local-bin-path .
-	aio http://www.hgamer3d.org/component/Run ./game (Linux)
-	aio http://www.hgamer3d.org/component/Run game.exe (Windows)
+.. _`SpaceIn3d`: http://github.com/urs-of-the-backwoods/SpaceIn3d
 
 Actors
 ------
