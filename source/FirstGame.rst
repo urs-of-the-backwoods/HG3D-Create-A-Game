@@ -1,37 +1,17 @@
 Start Programming
 #################
 
-The purpose of this chapter is showing you how to setup |HGamer3D| on your platform and to start compiling and running a first example game. Usually this is a complex endeavour since the combination of Haskell and C++ technologies gives some hurdles to the user. To circumvent that I separated the different pieces in independent components and created a tool, which downloads them and starts them, according to some meta-information contained in a toml file. All this happens behind the scenes, if you follow the instructions below. To make it transparent, I will start with a small introduction to the `aio` tool.
-
-The aio Tool
---------------
-
-There is a more detailed explanation to the tool `here`_ . To summarize, what `aio` is doing and also what it is not doing:
-
-`aio` does the following:
-
-- reading a toml meta-file, given by a URL, downloading dependencies into $HOME/.aio, running commands from there
-- checking, if the downloaded data is properly signed by a ssh key
-- asking before download of each component for allowance, giving component name, purpose, license and signing key information
-- setting environment variables to facilitate dependency injection between components, only for the environment of the running program
-
-`aio` is not doing anything of the following things:
-
-- does not download anything into a different folder
-- does not modify the Windows registry or similar databases
-- does not download any components, which have not been announced before
-- does not download components, which are not properly signed
-
-You can check the source code of `aio` in the public `github repository`_
-
-.. _`github repository`: https://github.com/urs-of-the-backwoods/fresco/blob/master/arriccio/main.go
-.. _`here`: Arriccio.html
+The purpose of this chapter is showing you how to setup |HGamer3D| on your platform and to start compiling and running a first example game.
 
 
 Setup of HGamer3D
 -----------------
 
-To setup everything needed for compiling |HGamer3D| programs, follow the instructions below:
+**Prerequisites**
+
+On Linux you need devtools and libgmp, for example on Ubuntu, please install: ``libgmp3-dev`` and ``build-essentials`` and similar packages on other distros. On Windows, you will need the `Visual C++ 2015 Runtime`_. Mac users need to setup developer tools also.
+
+.. _`Visual C++ 2015 Runtime`: https://www.microsoft.com/de-de/download/details.aspx?id=52685
 
 **Install aio**
 
@@ -48,9 +28,7 @@ As a second step cd into the folder of your operating system (Linux, Windows, Ma
 
 **Install HGamer3D Client Tools**
 
-As described above, *aio* is just a command, to download dependent libraries, media and tools. You now can use it, to setup the commands, you will use for creating, compiling and running |HGamer3D| code.
-
-Please issue the following command, which will create some aio alias commands for the next steps and which installs Stack and GHC, the Haskell tools:
+As described above, *aio* is just a command, to download dependent libraries, media and tools. I provided an additional installer to create commands for the different tasks of |HGamer3D|. Please issue the following command, which will create some aio alias commands for the next steps and which installs Stack and GHC, the Haskell tools:
 
 .. code-block:: console
 
@@ -59,7 +37,10 @@ Please issue the following command, which will create some aio alias commands fo
 This should end up with a message that GHC is now available, locally. In addition some alias are setup, which you can check with the ``aio list alias`` command. 
 
 
-**Scaffold, Build and Run Project**
+Create a Project from a Template
+--------------------------------
+
+**Create and Compile a Sample Project**
 
 Now everything is ready to go, follow the final steps to create a sample project, compile and run it:
 
@@ -68,11 +49,8 @@ Now everything is ready to go, follow the final steps to create a sample project
   aio Create GameProject
   cd GameProject
   aio Stack install --local-bin-path .	
-  aio Run ./game
-
-On the Windows platform, you need to modify the last command to ``aio Run game.exe``. 
-
-Done.
+  aio Run ./game (Linux/Mac)
+  aio Run game.exe (Windows)
 
 |
 

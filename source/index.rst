@@ -16,28 +16,85 @@ HGamer3D
 
 |
 
-Welcome to the home of |HGamer3D| a toolset for Haskell 3D game programming. On the following pages you will find an introduction how to use it and some details to specific topics. |HGamer3D| is not ready for real world use, it is currently an experimental toy. So you might ask, what is the strategy behind this project, what is the future of |HGamer3D|? First, have a look yourself, starting and exploring |HGamer3D| is easy and does not consume too much time. And it is fun to use Haskell for playing with 3D technologies. Then, although my time for this project will be certainly limited in the foreseeable future, the tooling has developed up to a point where creation of additional functionality can be done by others, also. What I mean with that is, that I follow a strategy to simplify hurdles for contribution. This is the reason for having designed a toolbox for binding generation, which is different from what you might have seen before and from a first view might be strange. But believe me, the goal is to open the doors for everybody, even with limited time, to extend the functionality. So |HGamer3D| uses a self-developed binding technology paired with a free game library (Urho3D if you are curious).
+Welcome to the home of |HGamer3D|. I created |HGamer3D| for the purpose of experimenting with the Haskell language in combination with 3D world creation. Unfortunatly, |HGamer3D| is not feature complete for the purpose of creating more advanced games. To give transparency on it's status, I have a small table, showing available features:
 
-I have a small request for you, the reader. Please don't be shy to e-mail me, if you encounter any difficulties in using |HGamer3D| according to the guides below. The e-mail address for this is: uotbw@hgamer3d.org.
++-----------------------------------------------+-------------------------------------------------------+
+| Feature                                       | Status                                                |
++===============================================+=======================================================+
+| Scene Tree                                    | available, 3D hierarchy is possible                   |
++-----------------------------------------------+-------------------------------------------------------+
+| 3D Objects                                    | you can create 3D objects from meshes and geometries  |
++-----------------------------------------------+-------------------------------------------------------+
+| Materials                                     | materials can be used on 3D objects, yes              |
++-----------------------------------------------+-------------------------------------------------------+
+| Scaling, Moving, Rotating Objects             | available                                             |
++-----------------------------------------------+-------------------------------------------------------+
+| Camera                                        | available, also split screen with 2 cameras           |
++-----------------------------------------------+-------------------------------------------------------+
+| Light                                         | different types of light available                    |
++-----------------------------------------------+-------------------------------------------------------+
+| Sound                                         | available                                             |
++-----------------------------------------------+-------------------------------------------------------+
+| Input Devices                                 | Keyboard yes, Mouse yes, Joystick no                  | 
++-----------------------------------------------+-------------------------------------------------------+
+| GUI                                           | small set of most important widgets available         |
++-----------------------------------------------+-------------------------------------------------------+
+| Event Handling                                | available                                             |
++-----------------------------------------------+-------------------------------------------------------+
+| Multi-Threading (Haskell can do it)           | available, calls form threads will be serialized      |
++-----------------------------------------------+-------------------------------------------------------+
+| Animated Characters                           | not available                                         |
++-----------------------------------------------+-------------------------------------------------------+
+| Scene Loading                                 | not available                                         |
++-----------------------------------------------+-------------------------------------------------------+
+| Particle Effects                              | not available                                         |
++-----------------------------------------------+-------------------------------------------------------+
+| Path Finding                                  | not available                                         |
++-----------------------------------------------+-------------------------------------------------------+
+| Networking                                    | not available                                         |
++-----------------------------------------------+-------------------------------------------------------+
+| Physics                                       | not available                                         |
++-----------------------------------------------+-------------------------------------------------------+
+| ...                                           | not available                                         |
++-----------------------------------------------+-------------------------------------------------------+
+
+
+I will update this table when new features are going to be available. Also my goal is to get tooling into a state where others can add features themselves (the underlying game engine - Urho3D - is pretty feature complete). 
+
+To get started, you need to use a small helper tool, called `aio`. Due to the nature of C++ / Haskell bindings there was no other way to structure an approach, which is easy to use for everybody and which works without hassle on Windows, Linux and Mac. Since I know, that many of you like transparency and don't like binaries, I explain the motivation behind it and the tool itself in more detail on the `first page`_.
+
+You can skip that if you feel safe enought to use `aio` right away and jump into installing. The 10 minute guide to get a first program build on your computure is in the `First Game`_ chapter.
+
+You might wonder, what it takes to distribute a created program. This is shortly explained in the `Distribution Guide`_.
+
+If you encounter any difficulties in using |HGamer3D| according to the guides below, please e-mail me a short description. The e-mail address for this is: uotbw@hgamer3d.org. This will help me to detect errors and fix them and future readers can benefit from it. Thank you!
+
+
+.. note:: A big "thank you!" to the creators and maintainers of Haskell, GHC, Urho3D, stack, vect and other open source libraries and tools. |HGamer3D| is based on their work. 
+
+.. _`first page`: Arriccio.html
+.. _`First Game`: FirstGame.html
+.. _`Distribution Guide`: Distribution.html
 
 
 **Table of Contents**
 
 .. 	toctree::
-	:maxdepth: 1
+  :maxdepth: 1
 
-	Start Programming <FirstGame>
-	More Examples <MoreExamples>
-	Geometries <Geometries>
-	Entities <Entities>
-	Coordinates <Coordinates>
-	Scene Graph <SceneGraph>
-	Events <Events>
-	Cuboid2 <Cuboid2>
-	Space Invaders <SpaceInvaders>
-	How To <HowTo>
-	Arriccio <Arriccio>
-	Impressum
+  Arriccio <Arriccio>
+  First Game <FirstGame>
+  More Examples <MoreExamples>
+  Geometries <Geometries>
+  Entities <Entities>
+  Coordinates <Coordinates>
+  Scene Graph <SceneGraph>
+  Events <Events>
+  Cuboid2 <Cuboid2>
+  Space Invaders <SpaceInvaders>
+  Distribution Guide <Distribution>
+  How To <HowTo>
+  Impressum
 
 ..
 	Tools: Distributing your Game <Distribution>
@@ -46,7 +103,6 @@ I have a small request for you, the reader. Please don't be shy to e-mail me, if
 |
 
 
-.. note:: A big "thank you!" to the creators and maintainers of Haskell, GHC, Urho3D, stack, Textadept, vect and other open source libraries and tools. |HGamer3D| is based on their work. 
 
 News
 ----

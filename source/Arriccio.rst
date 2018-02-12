@@ -3,13 +3,44 @@
 The Arriccio Tool
 #################
 
-Programming a game in any language involves a lot of different components to play together, for example game libraries, language bindings, multi media files and so on. All of those pieces need to go somewhere and usually it is quite some work to just figure out where to place them and to setup everything. 
+Short Introduction
+------------------
 
-To ease up game programming with Haskell, I created a small utility layer, called `fresco`_ and one of the tools out of this toolbox is the arriccio tool, with the short name ``aio``. The name arriccio is taken from the world of art, it is a specific layer of clay, which is used during the creation of a fresco. The arriccio tool is used to split a larger program into components and manage the bookkeeping on running components. It is based on some of the principles of `dependency injection`_ to separate the components from each other. Arriccio has been heavily inspired by `0install`_. 
+`aio` does the following:
 
-.. _`fresco`: http://github.com/urs-of-the-backwoods/fresco
-.. _`dependency injection`: https://en.wikipedia.org/wiki/Dependency_injection
+- reading a toml meta-file, given by a URL, which describes dependencies to a target program
+- downloading the binary target program and the needed dependencies into folders in the directory $HOME/.aio
+- checking, if the downloaded data is properly signed by a ssh key
+- asking before download of each component for allowance, giving component name, purpose, license and signing key information
+- setting environment variables to facilitate dependency injection between components, only for the environment of the running program
+- finally starting the target program with hints to the location of dependencies located in environment variables
+
+`aio` is not doing anything of the following things:
+
+- does not download anything into a different folder
+- does not modify the Windows registry or similar databases
+- does not download any components, which have not been announced before
+- does not download components, which are not properly signed
+
+
+Basically `aio` is a program runner, which cares for dependency resolution.
+
+
+Motivation
+----------
+
+Binding a C++ library like Urho3D to a different programming language involves the interplay of different binary components. First, you need to compile the base library, in this case Urho3D. In addition you need to compile the binding code - which is usually also written in C++ - and link it to the library. Then you need to compile the target program in Haskell and make the Haskell compiler to successfully link the binding layer. All this is only working if you care about library settings, compiler versions and other configuration topics and this for 3 different target platforms. It can be done and it is not totally sophisticated, but it turned out, it is nothing which is easily done by the starting hobby programmer.
+
+Therefore I've chosen a different approach. As a first important step, I broke the strict dependency of the Haskell program from the binding library by loading the library dynamically with dlopen. Then I provide the correct pre-compiled binaries for the C++ libraries and the binding code for all three target platforms as downloads. Finally I added a small utility which downloads the correct versions of all components together and which starts them correctly by making each component aware of the location of the others.
+
+You might recognize in the last step the `aio` tool. By the way this has been heavily inspired by `0install`_. You can think of `aio` being a simpler version of `0install` with some additions for the specific purpose used here. `aio` is written in go and you can check the source here `github repository`_
+
 .. _`0install`: http://0install.net
+.. _`github repository`: https://github.com/urs-of-the-backwoods/fresco/blob/master/arriccio/main.go
+
+
+Short Practice of aio Commands
+------------------------------
 
 Fire up arriccio without parameter and you will get a short helping introduction. If you look closer at the arriccio commands you'll see that most of them take the url or a name - an alias - as parameter. The primary key for distinguishing components is the url. Since url's tend to be long and difficult to remember, you can attach an alias for day to day use with arriccio. During the initial setup, some shortcuts have been set already, so if you start ``aio list alias`` you will get a list of already 'pre-defined' components.
 
@@ -134,24 +165,11 @@ The environment field gives information which is used by arriccio to interconnec
 And what is this specific component about? The ``HG3DEngineGio.0517`` component is the C++ binding library, which abstracts functionality from the Urho3D ++ game engine to be used later by the Haskell binding. It is a dynamic library and it uses the Urho3D engine. The latter is actually contained in the ``Urho3D-1.6`` component, so it is clear that the binding library needs the Urho3D engine as a pre-requisite. Arriccio also makes sure, that only the correct versions are interconnected and the fields ``operating-system`` and ``architecture`` make sure, that only components which can be run by the underlying hardware are chosen. As you can see, this also enables one component ``arriccio.toml`` file to specify all implementations for all supported platforms, so there is really just one ``arriccio.toml`` file for one component and it contains all information for all implementations. If you look into the ``http://www.hgamer3d.org/component/HG3DEngineGio.0517`` component, you will see that there are additional entries for the Windows and OS X platforms.
 
 
-Running Components
-------------------
-
-The arriccio tool runs components. It does so by following the sequence below:
-
-- Read each components ``arriccio.toml`` file in the complete tree. Check signatures.
-- Check if there is a combined set of implementations, which are fitting the current platform and architecture constraints.
-- Download the component implementations of the identified target set to the internal cache, if not already done so. Ask for permission beforehand.
-- Check signatures of downloaded components.
-- Set all needed environment variables to inject the information on location and parameters of dependencies.
-- Execute the given executable in the context of all dependencies, or the command given in the component meta-data itself.
-
-
 **Internal Cache**
 
 Arriccio keeps its data in ``~/.aio``. In this folder there is a database of local alias and directory definitions. In addition there are two subfolders, ``cache`` and ``impl``. The ``cache`` folder contains caches of the component arriccio.toml files. Therefore all programs work without internet connection, once a set of component arriccio.toml files have been cached. The ``impl`` folder contains the data of the implementations. Names in those folders are according to the hash values of the component urls for the component meta-data and of the file urls for the implementation data. You can do a ``find`` on the ~/.aio folder and see, how the structure looks like after downloading for example the ``Run`` component.
 
-An update to the cache is not initiated automatically, you need to issue the ``aio update`` command with the respective component url as parameter to force it.
+An update to the cache is not initiated automatically, instead `aio` runs without internet connection happily, once the dependencies have been downloaded the first time. Therefore to get updates, you need to issue the ``aio update`` command with the respective component url as parameter to force it. There is a philosophy of versioning underneath all that, which will be explained in a future chapter.
 
 .. note:: Arriccio is not well behaving currently, if there is not enough space in ``~/.aio``. So please make sure you have enough free space available.
 
