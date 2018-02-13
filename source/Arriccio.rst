@@ -46,12 +46,9 @@ Fire up arriccio without parameter and you will get a short helping introduction
 
 .. code-block:: console
 
-	Install  -  http://www.hgamer3d.org/tools/Install.1217
-	Run  -  http://www.hgamer3d.org/tools/Run.0517
-	Stack  -  http://www.hgamer3d.org/tools/Stack.0617
+	HGamer3D  -  http://www.hgamer3d.org/tools/HGamer3D.0218
 	3DEdit  -  http://www.hgamer3d.org/tools/Urho3DEditor-1.6
 	AssetImporter  -  http://www.hgamer3d.org/tools/AssetImporter-1.6
-	Create  -  http://www.hgamer3d.org/tools/CreateProject.1217
 	Edit  -  http://www.hgamer3d.org/tools/Edit.0917
 
 Let's try now one of those components in isolation for purpose of getting more used to arriccio. Simply issue the following command in a shell:

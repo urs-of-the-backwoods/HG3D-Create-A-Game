@@ -4,7 +4,7 @@ Scene Graph
 |
 
 .. image:: images/RotatingCube2.jpg
-   :width: 60%
+   :width: 40%
 
 |
 
@@ -12,10 +12,53 @@ To structure all the 3d elements in a scene and to enable efficient manipulation
 
 The code to make all this possible is shown in the example below:
 
-.. literalinclude:: ../../HGamer3D/samples/RotatingCube2.hs
-    :start-after: -- HGamer3D website, scene graph, complete example
-    :end-before: -- end of website text
-    :language: Haskell
+.. code-block:: haskell
+
+      es <- newET hg3d [
+            -- create camera
+            () -: [
+                  ctCamera #: FullViewCamera,
+                  ctPosition #: Vec3 1 1 (-30.0),
+                  ctLight #: Light PointLight 1.0 1000.0 1.0 
+                  ],
+            -- create text
+            () -: [
+                  ctStaticText #: "Rotating Cube Example",
+                  ctScreenRect #: ScreenRect 10 10 100 25
+                  ],
+            -- create geometry, with child geometry items
+            "eGeo" <| ([
+                  ctGeometry #: ShapeGeometry Cube,
+                  ctMaterial #: matBlue,
+                  ctScale #: Vec3 5.0 5.0 5.0,
+                  ctPosition #: Vec3 0.0 0.0 0.0,
+                  ctOrientation #: unitU
+                  ], [
+                        "eSmall" <| ([
+                              ctGeometry #: ShapeGeometry Sphere,
+                              ctMaterial #: matGreen,
+                              ctPosition #: Vec3 (-0.5) 0.5 (-0.5),
+                              ctScale #: Vec3 0.8 0.8 0.8,
+                              ctOrientation #: unitU
+                              ],
+                              [
+                                () -: [
+                                    ctGeometry #: ShapeGeometry Sphere,
+                                    ctMaterial #: matRed,
+                                    ctScale #: Vec3 0.5 0.5 0.5,
+                                    ctPosition #: Vec3 (0.0) (-0.5) (-0.5),
+                                    ctOrientation #: unitU
+                                    ]
+                              ])
+                  ]),
+
+            -- create button
+            "eButton" <: [
+                  ctButton #: Button False "Exit",
+                  ctScreenRect #: ScreenRect 200 10 50 25
+                  ]
+
+			]
 
 As you can see, this example introduces a small syntax for building trees from entities. The rules to use this syntax are:
 
