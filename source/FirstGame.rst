@@ -39,6 +39,10 @@ Run the following command:
 
 This will give you some aliases, for example from now on, you only need to type ``aio HGamer3D <command>`` but also additional tooling and it installs the Haskell compiler.
 
+.. note:: 
+
+	To update |HGamer3D| from previous installations, you can use the ``aio HGamer3D update`` command. This will always give you the latest version. If you encounter strange errors, try to remove everything by ``rm -rf ~/.aio`` and start from the beginning with the install command above.
+
 |
 
 Create and Compile a Project

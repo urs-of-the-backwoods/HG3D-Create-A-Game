@@ -91,8 +91,8 @@ Features
 +-----------------------------------------------+-------------------------------------------------------+------------------------+
 | Sound                                         | available                                             | `Sample 04`_           |
 +-----------------------------------------------+-------------------------------------------------------+------------------------+
-| Input Devices                                 | Keyboard yes, Mouse yes, Joystick yes                 | `Sample 05`_, `07`_,   |
-|                                               |                                                       | `12`_                  |
+| Input Devices                                 | Keyboard yes, Mouse yes, Joystick yes                 | `Sample 12`_, `05`_,   |
+|                                               |                                                       | `07`_                  |
 +-----------------------------------------------+-------------------------------------------------------+------------------------+
 | GUI                                           | small set of most important widgets available         | `Sample 06`_           |
 +-----------------------------------------------+-------------------------------------------------------+------------------------+
@@ -122,14 +122,13 @@ Features
 .. _`Sample 02`: http://github.com/urs-of-the-backwoods/HGamer3D/tree/master/samples/Sample_02_Materials.hs
 .. _`Sample 03`: http://github.com/urs-of-the-backwoods/HGamer3D/tree/master/samples/Sample_03_Hierarchy.hs
 .. _`Sample 04`: http://github.com/urs-of-the-backwoods/HGamer3D/tree/master/samples/Sample_04_Sound.hs
-.. _`Sample 05`: http://github.com/urs-of-the-backwoods/HGamer3D/tree/master/samples/Sample_05_MouseModes.hs
+.. _`05`: http://github.com/urs-of-the-backwoods/HGamer3D/tree/master/samples/Sample_05_MouseModes.hs
 .. _`Sample 06`: http://github.com/urs-of-the-backwoods/HGamer3D/tree/master/samples/Sample_06_GUI.hs
 .. _`07`: http://github.com/urs-of-the-backwoods/HGamer3D/tree/master/samples/Sample_07_Joystick.hs
 .. _`Sample 08`: http://github.com/urs-of-the-backwoods/HGamer3D/tree/master/samples/Sample_08_SceneLoad.hs
 .. _`Sample 09`: http://github.com/urs-of-the-backwoods/HGamer3D/tree/master/samples/Sample_09_Skybox.hs
 .. _`Sample 10`: http://github.com/urs-of-the-backwoods/HGamer3D/tree/master/samples/Sample_10_3DText.hs
 .. _`Sample 11`: http://github.com/urs-of-the-backwoods/HGamer3D/tree/master/samples/Sample_11_Particles.hs
-.. _`12`: http://github.com/urs-of-the-backwoods/HGamer3D/tree/master/samples/Sample_12_EventHandling.hs
 .. _`Sample 12`: http://github.com/urs-of-the-backwoods/HGamer3D/tree/master/samples/Sample_12_EventHandling.hs
 
 I will update this table when new features are available. Also my goal is to get tooling into a state where others can add features themselves (the underlying game engine - Urho3D - is pretty feature complete). 
@@ -163,7 +162,7 @@ The following pages give an introduction to the API:
 
 News
 ----
-- Feb, 2018 - version 0.95 with new features (Skybox, Scene Load, Particles, 3D Text)
+- Feb, 2018 - version 0.95 with new features (Joystick, Skybox, Scene Load, Particles, 3D Text)
 - Dec, 2017 - updated instructions, to use it, fixed errors in Linux usage
 - Sep, 2017 - Version 0.9 - updated Website
 - April, 10th, 2017 - updated Website
